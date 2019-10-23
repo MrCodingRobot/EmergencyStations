@@ -1,0 +1,7 @@
+Station,Latitude,Longitude,Alarms,Gallons,Panel Current (A),Battery Voltage (V),CEP* (km),Upload Time
+6,27.0215,-98.1301,All Good,6,0.03,0.0,2.0,2019-10-04 23:27:06 CDT
+1,29.4487,-98.4451,Low Weight,2,NI**,NI**,6.0,2019-10-05 05:44:30 CDT
+2,27.1990,-98.1472,All Good,4,NI**,NI**,2.0,2019-10-05 21:58:24 CDT
+3,27.2334,-98.1072,Low Weight,2,NI**,NI**,4.0,2019-06-19 09:24:21 CDT
+4,27.2334,-98.1072,All Good,6,NI**,NI**,2.0,2019-10-05 06:33:40 CDT
+5,27.2311,-98.1472,Barrel Removed,0,NI**,NI**,4.0,2019-10-04 23:46:49 CDT
