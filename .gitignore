@@ -2,3 +2,9 @@
 
 # Ignore all the log files
 *.log*
+
+# Ignore all key files
+*.asc
+
+# Ignore local only files
+Local_Only_Files/
