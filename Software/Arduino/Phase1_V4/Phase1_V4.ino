@@ -35,8 +35,8 @@ Additional useful information:
 // Constants
 
 // Station Identifiers
-const uint8_t STATION_NUMBER = 5;
-const char ROCKBLOCK_NUMBER[] = "300234067638200";
+const uint8_t STATION_NUMBER = 3;
+const char ROCKBLOCK_NUMBER[] = "300234067431270";
 
 // Pin Setup
 const int WEIGHT_SENSORS_PINS[] = {A0,A1,A2,A8}; // 3 sensors and reference
