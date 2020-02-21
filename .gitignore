@@ -7,4 +7,4 @@
 *.asc
 
 # Ignore local only files
-Local_Only_Files/
+LocalOnlyFiles/

@@ -1,0 +1,5 @@
+# This is the data that we don't want people to know
+
+global_variables.py filter=git-crypt diff=git-crypt
+#client_secrets.json filter=git-crypt diff=git-crypt
+#*.key filter=git-crypt diff=git-crypt

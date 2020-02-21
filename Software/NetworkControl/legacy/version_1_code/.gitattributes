@@ -1,0 +1,4 @@
+# This are the files that we want to keep safe
+
+client_secrets.json filter=git-crypt diff=git-crypt
+global_variables.py filter=git-crypt diff=git-crypt

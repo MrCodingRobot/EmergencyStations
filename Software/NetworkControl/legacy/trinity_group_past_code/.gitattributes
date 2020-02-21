@@ -1,0 +1,4 @@
+# This are the files that we want to keep safe
+
+phase2_v1_network_control.py filter=git-crypt diff=git-crypt
+V2_Network_Control.py filter=git-crypt diff=git-crypt
