@@ -19,6 +19,11 @@ import utility as util
 
 class MySQLClient():
 
+    """
+    MySQLClient is a module/class that fetches mysql data, uploads data to 
+    mysql database, and to make modifications to the mysql database.
+    """
+
     def __init__(self):
 
         """
@@ -45,6 +50,7 @@ class MySQLClient():
         This function is for adding new entries to the database in this format
         """
 
+        # Creating a sqlalchemy engine to upload all the dataframes to mysql
         engine = sqlalchemy.create_engine("mysql://southti6_eduardo:davalos97@southtexashrc.com/southti6_StationsWeightLevel")
         con = engine.connect()
 
@@ -55,6 +61,7 @@ class MySQLClient():
                 print("TABLE: {} - DF: Empty".format(station_table))
                 continue
 
+            # Uploading dataframe to mysql
             print("TABLE: {}\nDF: {}".format(station_table, df))
             df.to_sql(con=con, name=station_table, if_exists="append")
 
@@ -67,6 +74,8 @@ class MySQLClient():
 
     def remove_duplicates(self):
 
+        # Removing duplicates throughout all tables in the database
+
         for station in gv.STATION_INFO:
 
             command = ("ALTER TABLE {} ADD UNIQUE (time_id)".format(station["table"]))
@@ -75,6 +84,8 @@ class MySQLClient():
         return None
 
     def order_by_time(self):
+
+        # Ordering all tables in the database by time in a descending order
 
         for station in gv.STATION_INFO:
 
@@ -85,7 +96,11 @@ class MySQLClient():
 
     def fetch_data(self, limit = gv.AUTOPLOT_VALUE_SIZE_LIMIT):
 
+        # Fetching data from all tables 
+
         for station in gv.STATION_INFO:
+
+            # Fetching depending on the limit vaue
 
             if limit == "None":
                 command = ("SELECT * FROM {}".format(station["table"]))
@@ -94,6 +109,7 @@ class MySQLClient():
             
             self.cursor.execute(command)
 
+            # Getting the fetched data, making it into python dataframe object, and cleaning it up
             table_rows = self.cursor.fetchall()
             df = pd.DataFrame(table_rows, columns=self.cursor.column_names)
             df = util.sort_and_clean_df(df)
@@ -103,6 +119,7 @@ class MySQLClient():
         return None
 
     def close(self):
+        
         # Closing the session
         self.cnx.commit()
         self.cursor.close()

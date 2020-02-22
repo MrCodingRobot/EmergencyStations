@@ -21,7 +21,25 @@ import utility as util
 
 class EmailClient():
 
+    """
+    The EmailClient class/module is responsible of fetching, 
+    parsing, and passing on the information within the emails 
+    recieved from the stations.
+
+    Firstly, the UIDs are fetched depending on the type of search
+    is being conducted ("New", "Last" and "All"). Then the actual email
+    text has to be obtained with recently aquired UIDs. Afterwards,
+    the email's text has to be processed/parsed to retrieve the 
+    information of the stations (weight, location, and status)
+
+    Then this processed data is passed to the MySQLClient to 
+    update the MySQL database containing all the information 
+    of the stations.
+    """
+
     def __init__(self):
+
+        # Initializing the primary attributes of the class
 
         self.imap_client = self.imap_client_setup()
         self.email_info = {}
@@ -78,6 +96,13 @@ class EmailClient():
 
     def fetch_uids(self, fetch_type = "Last", last_quantity = 1):
 
+        """
+        Before getting the email's juicy information, we have to get the email's 
+        UIDs. We have get "All" of the email's UIDs, the "New" ones, or just the 
+        "Last" ones. The "Last" fetch type has the ability of increasing the fetch 
+        range of the last email's UIDs with the last_quantity attribute.
+        """
+
         for water_station in gv.STATION_INFO:
 
             # Fetching emails based on selected category
@@ -106,13 +131,21 @@ class EmailClient():
 
     def fetch_emails_text(self):
 
+        """
+        Now that we have the emails UIDs, now we can obtain the text information
+        within the emails. 
+        """
+
         for station_email, uid_content in self.email_info.items():
 
             for uid in uid_content.keys():
 
                 email_text = None
 
+                # Getting the raw text information of the email
                 raw_message = self.imap_client.fetch(uid, ['BODY[]'])
+
+                # Processing the text information to make it easier to read
                 message = pyzmail.PyzMessage.factory(raw_message[uid][b'BODY[]'])
 
                 if message.html_part != None:
@@ -121,11 +154,17 @@ class EmailClient():
                 if message.text_part != None:
                     email_text = message.text_part.get_payload().decode(message.text_part.charset)
 
+                # Appending the text to the self.email_info attribute to keep track of info
                 self.email_info[station_email][uid]["text"] = email_text
 
         return self.email_info
 
     def parse_emails_text(self):
+
+        """
+        This function then retrieves the information found within the text
+        of the email.
+        """
 
         if self.email_info == {}:
             raise RuntimeError("Please fetch emails before parsing emails")

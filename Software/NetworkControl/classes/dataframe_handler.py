@@ -16,7 +16,16 @@ import utility as util
 
 class DataFrameHandler():
 
+    """
+    This module, DataFrameHandler, is a small class that grabs the emails (accounts) dataframes,
+    with the possibility of multiple emails per emails (accounts) and creates a single dataframe
+    for each email account. Additionally, it removes duplicates and cleans the dataframe. Then
+    the DataFrameHandler passes on this clean simple dataframe to the MySQLClient for upload. 
+    """
+
     def __init__(self, email_info):
+
+        # Creating some of the primary class attributes
 
         self.email_info = email_info
         self.all_emails_df = {}
@@ -32,6 +41,8 @@ class DataFrameHandler():
 
     def generate_all_emails_df(self):
 
+        # Generating all_emails_df, it being the combined emails dataframe
+
         for station_email, uids_content in self.email_info.items():
 
             uid_keys = list(uids_content.keys()) 
@@ -43,6 +54,7 @@ class DataFrameHandler():
             for i in range(1,len(uid_keys)):
                 df = df.append(uids_content[uid_keys[i]]["dataframe"])
 
+            # Cleaning and sorting dataframe
             df = util.sort_and_clean_df(df)
 
             self.all_emails_df[station_email] = df

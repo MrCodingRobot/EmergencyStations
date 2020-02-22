@@ -92,6 +92,7 @@ def generate_markers_file():
 
 def upload_all_data_files():
 
+    # Uploading all data files 
     data_uploader = clss.DataUploader()
     data_uploader.upload_all_data_files()
     

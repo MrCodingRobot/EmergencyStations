@@ -21,11 +21,38 @@ import utility as util
 
 class DatafileGenerator():
 
+    """
+    DatafileGenerator is the module responsible for generating all the data files,
+    it including the table, plot, and markers data.
+
+        Table Data - 
+            This table data shows the latest information from the water stations
+            and reports them on the website directly via a Table plugin.
+
+        Plot Data - 
+            This plot data is created with matplotlib into pngs. Then this png files 
+            are combined together into a PDF to easily scale and demostrate the plot data
+            of the station's historical data into the website.
+
+            NOTE: The PDF upload requires a unique upload location to allow the PDF viewer
+            plugin to access the PDF file.
+
+        Markers Data-
+            The markers data includes the location information of the stations and puts it 
+            into a CSV file with the right information to conform with Google Maps API. 
+
+            NOTE: When importing the URL of the file, include, on the plugin, the http in the URL.
+    """
+
     def __init__(self):
+
+        # Nothing really
 
         return None
 
     def generate_latest_data_table(self, mysql_table_df):
+
+        # Generates the table data CSV
 
         self.table_df = {"Station #": [],
                          "Upload Time": [],
@@ -69,6 +96,8 @@ class DatafileGenerator():
         # Making PNGs: http://queirozf.com/entries/pandas-dataframe-plot-examples-with-matplotlib-pyplot
         # Saving PNGs to PDF: https://stackoverflow.com/a/27327984
 
+        # Creating the plot PDF
+
         for station in gv.STATION_INFO:
 
             sta_i = station["email"] # station index
@@ -107,6 +136,8 @@ class DatafileGenerator():
         return None
 
     def generate_station_markers(self, mysql_table_df):
+
+        # Creating markers data file (CSV)
 
         station_locations = {}
         

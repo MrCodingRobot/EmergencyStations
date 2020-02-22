@@ -18,6 +18,31 @@ import utility as util
 
 class DataUploader():
 
+    """
+    This class is the module for uploading the data to the bluehost server.
+    The data refered to throughout this class is the table data (CSV), the 
+    plot data (PDF) and the markers data (CSV).
+
+        Table Data - 
+            This table data shows the latest information from the water stations
+            and reports them on the website directly via a Table plugin.
+
+        Plot Data - 
+            This plot data is created with matplotlib into pngs. Then this png files 
+            are combined together into a PDF to easily scale and demostrate the plot data
+            of the station's historical data into the website.
+
+            NOTE: The PDF upload requires a unique upload location to allow the PDF viewer
+            plugin to access the PDF file.
+
+        Markers Data-
+            The markers data includes the location information of the stations and puts it 
+            into a CSV file with the right information to conform with Google Maps API. 
+
+            NOTE: When importing the URL of the file, include, on the plugin, the http in the URL. 
+    """
+
+
     def __init__(self):
 
         # Creating FTP session
